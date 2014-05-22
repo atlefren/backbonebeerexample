@@ -97,12 +97,13 @@ var BL = BL || {};
 
         render: function () {
             this.$el.show();
-            this.$el.html(_.template(this.template, this.model.toJSON()));
+            this.$el.html(_.template(this.template, this.model.toJSON()));            
             return this;
         },
 
         destroy: function () {
             //wait for å ikke få event før server svarer
+            this.model.off('sync');
             this.model.destroy({'wait': true});
         },
 
