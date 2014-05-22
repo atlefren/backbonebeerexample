@@ -26,7 +26,9 @@
                 <th>ABV</th>
                 <th>Score</th>
                 <th>Amount (bottles)</th>
-                <th></th>
+                <th>
+                    <button id="add" type="button" class="btn">Legg til</button>
+                </th>
             </tr>
         </thead>        
         <tbody>
@@ -39,8 +41,22 @@
         <td><%= abv %></td>
         <td><%= score %></td>
         <td><%= amount %></td>
-        <td></td>
+        <td>
+            <button id="delete" class="btn btn-danger" type="button">Slett</button>
+            <button id="edit" class="btn" type="button">Endre</button>
+        </td>
     </script>
+
+    <script type="text/template" id="beer_edit_template">
+        <td><input name="brewery" type="text" value="<%= brewery %>"></td>
+        <td><input name="name" type="text" value="<%= name %>"></td>
+        <td><input name="abv" type="text" value="<%= abv %>"></td>
+        <td><input name="score" type="text" value="<%= score %>"></td>
+        <td><input name="amount" type="text" value="<%= amount %>"></td>
+        <td><button id="save" type="button" class="btn btn-primary">Lagre</button></td>
+    </script>
+
+    
 
 
     {% assets "javascript" %}
@@ -49,6 +65,9 @@
     <script type="text/javascript">
     (function () {
 
+
+
+        /*
         var beerJson = [
             {"brewery": "Austmann", "name": "Jingle Beer", "score": 6.49, "abv": 7},
             {"brewery": "Binding-Brauerei", "name": "Santa Clausthaler", "score": 2.14, "abv": 0},
@@ -64,7 +83,8 @@
             {"brewery": "Nøgne Ø", "name": "Julesnadder", "score": 7.19, "abv": 4.5},
             {"brewery": "Nøgne Ø", "name": "Special Holiday Ale", "score": 6.71, "abv": 9},
             {"brewery": "Ægir", "name": "Julebrygg", "score": 6.21, "abv": 4.7}
-        ];
+        ];*/
+        var beerJson = {{beers | safe}};
 
         var beers = new BL.Beers(beerJson);
         var beerTableView = new BL.BeerTableView({
